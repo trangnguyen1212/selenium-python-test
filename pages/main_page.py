@@ -45,8 +45,7 @@ class MainPage(BasePage):
         self.wait_for_until_element_exist("//button[contains(text(), 'Place Sell Order')]").click()
         self.wait_for_until_element_exist("//button[contains(text(), 'Confirm')]").click()
         # Validate order confirmation message
-        self.wait_for_until_element_exist("//div[@data-testid='trade-confirmation-label']")
-        order_confirmation = self.wait_for_until_element_exist("//div[@data-testid='notification-description']").text
+        order_confirmation = self.wait_for_element("//div[@data-testid='notification-description']").text
         assert "Stop Order Submitted" in order_confirmation
         print("Market order placed successfully with Stop Loss and Take Profit.")
 
@@ -67,17 +66,10 @@ class MainPage(BasePage):
         self.wait_for_element("//div[contains(text(), 'Trade Details (USD)')]").click()
         increase_volumne = self.wait_for_element("//div[@data-testid='trade-input-volume-increase']")
         self.click_element(increase_volumne)
-        increase_stoploss = self.wait_for_element(
-            "//div[@data-testid='trade-input-stoploss-price-increase']")
-        self.click_element(increase_stoploss)
-        increase_takeprofit = self.wait_for_element(
-            "//div[@data-testid='trade-input-takeprofit-price-increase']")
-        self.click_element(increase_takeprofit)
-        # expand
-        self.wait_for_element("//div[contains(text(), 'Trade Details (USD)')]").click()
-        increase_takeprofit.click()
-        self.wait_for_element("//button[contains(text(), 'Place Buy  Order')]").click()
-        self.wait_for_element("//button[contains(text(), 'Confirm')]").click()
+        self.wait_for_element("//input[@data-testid='trade-input-stoploss-price']").send_keys("2")
+        self.wait_for_element("//input[@data-testid='trade-input-takeprofit-price']").send_keys("2")
+        self.click_element(self.wait_for_element("//button[contains(text(), 'Place Buy Order')]"))
+        self.click_element(self.wait_for_element("//button[contains(text(), 'Confirm')]"))
 
         # Edit a position
         self.wait_for_until_element_exist("//div[@data-testid='asset-open-button-edit']").click()
@@ -139,17 +131,14 @@ class MainPage(BasePage):
         self.wait_for_element("//div[contains(text(), 'Trade Details (USD)')]").click()
         increase_volumne = self.wait_for_element("//div[@data-testid='trade-input-volume-increase']")
         self.click_element(increase_volumne)
-        increase_stoploss = self.wait_for_element("//div[@data-testid='trade-input-stoploss-price-increase']")
-        self.click_element(increase_stoploss)
-        increase_takeprofit = self.wait_for_element("//div[@data-testid='trade-input-takeprofit-price-increase']")
-        self.click_element(increase_takeprofit)
+        self.wait_for_element("//input[@data-testid='trade-input-stoploss-price']").send_keys("2")
+        self.wait_for_element("//input[@data-testid='trade-input-takeprofit-price']").send_keys("2")
+        # expand
+        self.click_element(self.wait_for_element("//button[contains(text(), 'Place Buy Order')]"))
+        self.click_element(self.wait_for_element("//button[contains(text(), 'Confirm')]"))
         #type
         self.wait_for_until_element_exist("//div[@data-testid='trade-dropdown-expiry']").click()
         self.wait_for_element("//div[contains(text(), 'Good Till Day')]").click()
-
-        # expand
-        self.wait_for_element("//div[contains(text(), 'Trade Details (USD)')]").click()
-        increase_takeprofit.click()
         self.wait_for_until_element_exist("//button[contains(text(), 'Place Sell Order')]").click()
         self.wait_for_until_element_exist("//button[contains(text(), 'Confirm')]").click()
         # Validate order confirmation message
@@ -171,19 +160,16 @@ class MainPage(BasePage):
         sell_button.click()
         # collapse
         self.wait_for_element("//div[contains(text(), 'Trade Details (USD)')]").click()
-        increase_volumne = self.wait_for_until_element_exist("//div[@data-testid='trade-input-volume-increase']")
+        increase_volumne = self.wait_for_element("//div[@data-testid='trade-input-volume-increase']")
         self.click_element(increase_volumne)
-        increase_stoploss = self.wait_for_element("//div[@data-testid='trade-input-stoploss-price-increase']")
-        self.click_element(increase_stoploss)
-        increase_takeprofit = self.wait_for_element("//div[@data-testid='trade-input-takeprofit-price-increase']")
-        self.click_element(increase_takeprofit)
+        self.wait_for_element("//input[@data-testid='trade-input-stoploss-price']").send_keys("2")
+        self.wait_for_element("//input[@data-testid='trade-input-takeprofit-price']").send_keys("2")
+        self.click_element(self.wait_for_element("//button[contains(text(), 'Place Buy Order')]"))
+        self.click_element(self.wait_for_element("//button[contains(text(), 'Confirm')]"))
         # type
         self.wait_for_until_element_exist("//div[@data-testid='trade-dropdown-expiry']").click()
         self.wait_for_element("//div[contains(text(), 'Good Till Cancelled)]").click()
 
-        # expand
-        self.wait_for_element("//div[contains(text(), 'Trade Details (USD)')]").click()
-        increase_takeprofit.click()
         self.wait_for_until_element_exist("//button[contains(text(), 'Place Sell Order')]").click()
         self.wait_for_until_element_exist("//button[contains(text(), 'Confirm')]").click()
         # Validate order confirmation message
