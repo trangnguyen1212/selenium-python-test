@@ -14,12 +14,19 @@ class BasePage:
 
         # Wait for elements to load
 
+    def scroll_to_element(self, selector):
+        self.driver.execute_script("arguments[0].scrollIntoView();", self.driver.find_element(By.XPATH, selector))
+
     def wait_for_element(self, selector, timeout=40):
         return self.driver.find_element(By.XPATH, selector)
 
     def wait_for_until_element_exist(self, selector):
         return  WebDriverWait(self.driver, 20).until(
                     EC.presence_of_element_located((By.XPATH, selector)))
+    def click_element(self, element):
+        element.click()
+        time.sleep(5)
+
 
     def accessByEmailForLogin(self, url):
         self.driver.get(url)

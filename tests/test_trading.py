@@ -15,10 +15,18 @@ class TestTrading(BaseTest):
         self.page = MainPage(self.driver, self.wait)
         self.page.stop_loss_take_profit()
 
+    def test_edit_pending_order(self):
+        self.page = MainPage(self.driver, self.wait)
+        self.page.edit_pending_order()
+
     def test_edit_close_partial_close_Open_position(self):
         self.page = MainPage(self.driver, self.wait)
         self.page.edit_close_partial_close_Open_position()
 
-    def test_edit_pending_order(self):
+    def test_limt_order_with_expiry_till_day(self):
         self.page = MainPage(self.driver, self.wait)
-        self.page.edit_close_partial_close_Open_position()
+        self.page.limt_order_with_expiry_till_day()
+
+    def test_limt_order_with_expiry_till_canceled(self):
+        self.page = MainPage(self.driver, self.wait)
+        self.page.limt_order_with_expiry_till_Cancelled()
